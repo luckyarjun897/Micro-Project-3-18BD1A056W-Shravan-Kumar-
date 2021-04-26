@@ -1,0 +1,96 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Library</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="Input.css">
+  <script >
+	function evaluate() {
+        var id=document.getElementByName("BookId").value;
+		console.log(id);
+		if(id.length==0)
+			alert(`Enter All Fields`);
+    }
+  </script>
+</head>
+<body class="hold-transition sidebar-mini">
+	
+	<div class="wrapper">
+		<aside class="main-sidebar sidebar-dark-primary elevation-4">
+		<!-- Brand Logo -->
+			<a href="#" class="brand-link">
+			  <img src="booklogo.png"
+				   alt="Fashion Feet Logo"
+				   class="brand-image img-circle elevation-3">
+			  <span class="brand-text font-weight-light">Library</span>
+			</a>
+			<!-- Sidebar -->
+			<nav class="mt-2">
+				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+					<li class="nav-item">
+						<a href="/create" class="nav-link">
+							<i class="nav-icon far fa-circle text-info"></i>
+							<p>Add Product</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="/sales" class="nav-link">
+							<i class="nav-icon far fa-circle text-info"></i>
+							<p class="text">Sales Details</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="/updatesale" class="nav-link">
+							<i class="nav-icon far fa-circle text-info"></i>
+							<p class="text">Update Sales</p>
+						</a>
+					</li>
+	  
+				</ul>
+			</nav>
+			<!-- /.sidebar -->
+		</aside>
+		
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			
+			<section class="content-header">
+				<h1>Library Inventory Management</h1>
+			</section>
+			<div class="addbox">
+				<h5 class="mainheading">Add New Book</h5><br>
+				<form class="addform" action="/Add" method="post">
+					<label>BookId</label>&nbsp;&nbsp;&nbsp;
+					<input type="text" placeholder="ID" name="BookId" required/><br><br>
+					<label>Category</label>&nbsp;&nbsp;&nbsp;
+					<input type="text" placeholder="Category" name="Category"required /><br><br>
+					<label>Name</label>&nbsp;&nbsp;&nbsp;
+					<input type="text" placeholder="Name" name="Name"  required /><br><br>
+					<label>Author</label>&nbsp;&nbsp;&nbsp;
+					<input type="text" placeholder="Author" name="Author" required/><br><br>
+					<label>Language</label>&nbsp;&nbsp;&nbsp;
+					<input type="text" placeholder="Language" name="Language" required/><br><br>
+					<label>Quantity</label>&nbsp;&nbsp;&nbsp;
+					<input type="text" placeholder="Quantity" name="Quantity" required/><br><br>
+					<label>Price</label>&nbsp;&nbsp;&nbsp;
+					<input type="text" placeholder="Price" name="Price" required/><br><br>
+					<input type="submit" value="submit">
+					<a href="/home" class="cancel"><input type="button" value="cancel"></a>
+				</form>	
+				
+			</div>	
+			
+		</div>
+		
+	</div>
+</body>
+</html>

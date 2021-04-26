@@ -1,0 +1,103 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Library</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="Input.css">
+</head>
+<body class="hold-transition sidebar-mini">
+	
+	<div class="wrapper">
+		<aside class="main-sidebar sidebar-dark-primary elevation-4">
+		<!-- Brand Logo -->
+			<a href="#" class="brand-link">
+			  <img src="booklogo.png"
+				   alt="Fashion Feet Logo"
+				   class="brand-image img-circle elevation-3">
+			  <span class="brand-text font-weight-light">Library</span>
+			</a>
+			<!-- Sidebar -->
+			<nav class="mt-2">
+				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+					<li class="nav-item">
+						<a href="/create" class="nav-link">
+							<i class="nav-icon far fa-circle text-info"></i>
+							<p>Add Product</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="/sales" class="nav-link">
+							<i class="nav-icon far fa-circle text-info"></i>
+							<p class="text">Sales Details</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="updatesale" class="nav-link">
+							<i class="nav-icon far fa-circle text-info"></i>
+							<p class="text">Update Sales</p>
+						</a>
+					</li>
+	  
+				</ul>
+			</nav>
+			<!-- /.sidebar -->
+		</aside>
+		
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			
+			<section class="content-header">
+				<h1>Library Inventory Management</h1>
+			</section>
+			<div class="addbox">
+				<h5 class="mainheading">Update Book</h5><br>
+                <div class="addform" >
+                <% for(var i=0;i<data.Books.length;i++) { %>
+                    <% var xx=data.Books[i].BookId;
+                       var x =xx.toString()%>
+                    <% var y=data.BookId %>
+                    <% if(x==y) {%>
+                        <div class="addform">
+                            <label>BookId</label>&nbsp;&nbsp;&nbsp; <label>:</label> &nbsp;
+                            <%=data.Books[i].BookId %><br><br>
+                            <label>Category</label>&nbsp;&nbsp;&nbsp; <label>:</label> &nbsp;
+                            <%=data.Books[i].Category %><br><br>
+                            <label>Name</label>&nbsp;&nbsp;&nbsp; <label>:</label> &nbsp;
+                            <%=data.Books[i].Name %><br><br>
+                            <label>Author</label>&nbsp;&nbsp;&nbsp; <label>:</label> &nbsp;
+                            <%=data.Books[i].Author %><br><br>
+                            <label>Language</label>&nbsp;&nbsp;&nbsp; <label>:</label> &nbsp;
+                            <%=data.Books[i].Language %><br><br>
+                            <label>Old Quantity</label>&nbsp;&nbsp;&nbsp; <label>:</label> &nbsp;
+                            <%=data.Books[i].Quantity %><br><br>
+                            <form action="editupdate" method="post">
+                                <input type="hidden" name="BookId" value=<%=data.BookId %>>
+                                <label>New Quantity</label>&nbsp;&nbsp;&nbsp; <label>:</label> &nbsp;
+                                <input type="text" palceholder="Quantity" name="Quantity" value=0 ><br><br>
+                                <label>Old Price</label>&nbsp;&nbsp;&nbsp; <label>:</label> &nbsp;
+                                <%=data.Books[i].Price %><br><br>
+                                <label>New Price</label>&nbsp;&nbsp;&nbsp; <label>:</label> &nbsp;
+                                <input type="text" placeholder="Price" name="Price" value=<%=data.Books[i].Price%>><br><br>
+                                <input type="submit" value="submit">
+                                <a href="/home" class="cancel"><input type="button" value="cancel"></a>
+                            </form>    
+                        </div>
+                    <% break;}%>
+                <% } %>        
+                </div>
+			</div>	
+			
+		</div>
+		
+	</div>
+</body>
+</html>

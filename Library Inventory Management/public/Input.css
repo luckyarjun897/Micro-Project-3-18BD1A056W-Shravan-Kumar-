@@ -1,0 +1,37 @@
+.addbox{
+    border: 1px solid whitesmoke;
+    margin-right: 50%;
+    margin-left: 1%;
+    box-shadow: 0 0 3px 3px gainsboro;
+    border-radius: 10px;
+}
+.addform{
+    padding-left: 1%;
+}
+.mainheading{
+   padding-left: 15%;
+   color:black;
+   padding-top: 2%;
+}
+.cancel{
+    margin-left: 65%;
+}
+.delete{
+    margin-top: 0%;
+    background-color: #dc3545;
+    border:none;
+    padding-bottom: 4px;
+    margin-right: 5px;
+}
+
+#visible{
+    visibility: hidden;
+}
+
+.excelform{
+    background-color:darkcyan;
+    padding: 10px;
+    margin-left: 5%;
+    margin-top: 1%;
+    color: white;
+}
