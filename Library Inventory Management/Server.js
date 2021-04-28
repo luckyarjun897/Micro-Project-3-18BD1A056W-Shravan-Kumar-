@@ -64,11 +64,13 @@ app.post('/editupdate',(req,res)=>{
 	let month = ("0" + (DATE.getMonth() + 1)).slice(-2);
 	let year = DATE.getFullYear();
 	var date=day.toString()+"-"+month.toString()+"-"+year.toString();
-	
 	var price;
 	var quantity;
 	var t_price;
+	var change;
+	var set=0;
 	var id={BookId:req.body.BookId};
+	var newValue;
 	db.collection('Books').find().toArray((err,result)=>{
 		for(var i=0;i<result.length;i++){
 			if(result[i].BookId==req.body.BookId){
@@ -81,7 +83,13 @@ app.post('/editupdate',(req,res)=>{
 				break;
 			}
 		}
-		var newValue={ $set :{Quantity:parseInt(req.body.Quantity)+parseInt(oldQuantity),Price:req.body.Price}};
+		if(parseInt(req.body.Quantity)+parseInt(oldQuantity)<0){
+			set=1;
+			change=(parseInt(req.body.Quantity)+parseInt(oldQuantity))*-1;
+			newValue={ $set :{Quantity:0,Price:req.body.Price}};
+			quantity=quantity-change;
+		}
+		else{newValue={ $set :{Quantity:parseInt(req.body.Quantity)+parseInt(oldQuantity),Price:req.body.Price}};}
 		db.collection('Books').updateOne(id,newValue,(err,result)=>{
 			if(err) return console.log(err);
 			if(parseInt(req.body.Quantity)+parseInt(oldQuantity)<parseInt(oldQuantity)){
@@ -112,6 +120,7 @@ app.post('/editupdate',(req,res)=>{
 		})
 	})
 })
+
 
 app.get('/sales',(req,res)=>{
 	db.collection('BooksSales').find().toArray((err,result)=>{
