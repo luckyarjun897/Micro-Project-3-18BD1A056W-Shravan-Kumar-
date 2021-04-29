@@ -134,6 +134,7 @@ app.get('/updatesale',(req,res)=>{
 	res.render("updatesales.ejs");
 })
 
+
 app.post('/salesUpdate',(req,res)=>{
 	db.collection('BooksSales').find({BookId:req.body.BookId,Purchase_Date:req.body.Purchase_Date}).toArray((err,result)=>{
 		if(err) return console.log(err);
@@ -141,15 +142,34 @@ app.post('/salesUpdate',(req,res)=>{
 		var quantity=parseInt(result[0].Quantity)+parseInt(req.body.Quantity);
 		var query1={ $set :{Quantity:quantity,Total_Price:t_price}}
 		var query={ _id :result[0]._id}
-		console.log(query);
 		var id=req.body.BookId;
+		var qq=parseInt(req.body.Quantity)*-1;
+		if(quantity<=0){
+			if(quantity<0){
+				qq=result[0].Quantity;
+			}
+			db.collection('BooksSales').deleteOne(query,(err,resultdel)=>{
+				if(err) return console.log(err);
+			})
+		}
+		else{
 		db.collection('BooksSales').updateOne(query,query1,(err,results)=>{
 			if(err) return console.log(err);
-			res.redirect('/sales');
+		})}
+		db.collection('Books').find({BookId:req.body.BookId}).toArray((err,resultsss)=>{
+			if(err) return console.log(err);
+			console.log(resultsss)
+			var q=(qq)+resultsss[0].Quantity;
+			var qr={ $set :{Quantity:q}}
+			db.collection("Books").updateOne({BookId:req.body.BookId},qr,(err,resultss)=>{
+				if(err) return console.log(err);
+			})
 		})
+		res.redirect('/sales')
 		
 	})
 })
+
 
 app.post('/excel',(req,res)=>{
 	db.collection('BooksSales').find().toArray((err,result)=>{
