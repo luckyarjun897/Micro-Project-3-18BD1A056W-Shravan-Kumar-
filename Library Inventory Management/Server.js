@@ -137,6 +137,10 @@ app.get('/updatesale',(req,res)=>{
 
 app.post('/salesUpdate',(req,res)=>{
 	db.collection('BooksSales').find({BookId:req.body.BookId,Purchase_Date:req.body.Purchase_Date}).toArray((err,result)=>{
+		if(result.length==0){
+			console.log("Couldn't found id or date");
+		}
+		else{
 		if(err) return console.log(err);
 		var t_price=parseInt(result[0].Total_Price)-(parseInt(req.body.Quantity)*parseInt(result[0].Price)*-1);
 		var quantity=parseInt(result[0].Quantity)+parseInt(req.body.Quantity);
@@ -158,18 +162,17 @@ app.post('/salesUpdate',(req,res)=>{
 		})}
 		db.collection('Books').find({BookId:req.body.BookId}).toArray((err,resultsss)=>{
 			if(err) return console.log(err);
-			console.log(resultsss)
 			var q=(qq)+resultsss[0].Quantity;
 			var qr={ $set :{Quantity:q}}
 			db.collection("Books").updateOne({BookId:req.body.BookId},qr,(err,resultss)=>{
 				if(err) return console.log(err);
 			})
 		})
+		}
 		res.redirect('/sales')
 		
 	})
 })
-
 
 app.post('/excel',(req,res)=>{
 	db.collection('BooksSales').find().toArray((err,result)=>{
